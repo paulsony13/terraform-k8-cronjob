@@ -14,7 +14,7 @@ A reusable and scalable Terraform module to deploy Kubernetes CronJobs on AWS EK
 
 ```hcl
 module "app_cronjobs" {
-  source    = "github.com/paulsony13/k8-cronjob.git//modules/cronjob?ref=main"
+  source    = "paulsony13/terraform-k8-cronjob"
   namespace = "namespace"
   eks_cluster_name = "my-cluster"
   aws_region       = "us-east-1"
