@@ -29,13 +29,13 @@ resource "kubernetes_cron_job_v1" "cronjob" {
             labels = merge(var.default_labels, each.value.labels)
           }
           spec {
-            restart_policy = "OnFailure"
+            restart_policy       = "OnFailure"
             service_account_name = each.value.service_account_name
 
             dynamic "node_selector" {
-              for_each = each.value.node_selector != null ? [1] : []
+              for_each = each.value.node_selector != null ? [each.value.node_selector] : []
               content {
-                for k, v in each.value.node_selector : k => v
+                match_labels = node_selector.value
               }
             }
             dynamic "toleration" {
