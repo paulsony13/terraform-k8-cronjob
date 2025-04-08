@@ -1,28 +1,13 @@
 module "app_cronjobs" {
-  source    = "paulsony13/terraform-k8-cronjob"
-  namespace = "namespace"
-  eks_cluster_name = "my-cluster"
+  source    = "github.com/paulsony13/k8-cronjob.git/?ref=main"
+  namespace = "default"
+  eks_cluster_name = "vetinsight-dev"
   aws_region = "us-east-1"
   default_labels = {
     "team"    = "devops"
     "managed" = "terraform"
   }
   cronjobs = [
-    {
-      enabled          = true
-      cronjob_name     = "s3-cleaner"
-      cronjob_image    = "amazon/aws-cli:latest"
-      cronjob_command  = ["sh", "-c", "aws s3 rm s3://my-bucket/tmp/ --recursive"]
-      cronjob_schedule = "0 * * * *"
-      cronjob_timezone = "UTC"
-      enabled          = true
-      env_vars = [
-        { name = "AWS_REGION", value = "us-west-2" }
-      ]
-      labels = {
-        "app" = "s3-cleaner"
-      }
-    },
     {
       enabled          = true
       cronjob_name     = "db-backup"

@@ -32,12 +32,8 @@ resource "kubernetes_cron_job_v1" "cronjob" {
             restart_policy       = "OnFailure"
             service_account_name = each.value.service_account_name
 
-            dynamic "node_selector" {
-              for_each = each.value.node_selector != null ? [each.value.node_selector] : []
-              content {
-                match_labels = node_selector.value
-              }
-            }
+            node_selector = each.value.node_selector != null ? each.value.node_selector : {}
+
             dynamic "toleration" {
               for_each = each.value.tolerations != null ? each.value.tolerations : []
               content {
