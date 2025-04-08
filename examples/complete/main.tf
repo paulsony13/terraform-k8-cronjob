@@ -1,6 +1,6 @@
 module "app_cronjobs" {
   source    = "github.com/paulsony13/k8-cronjob.git/?ref=main"
-  namespace = "default"
+  namespace = "namespace"
   eks_cluster_name = "cluster-name"
   aws_region       = "us-east-1"
   default_labels = {
