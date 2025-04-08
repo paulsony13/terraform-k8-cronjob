@@ -1,5 +1,5 @@
 resource "kubernetes_cron_job_v1" "cronjob" {
-  for_each = var.cronjobs ? {
+  for_each = length(var.cronjobs) > 0 ? {
     for idx, cronjob in var.cronjobs : idx => cronjob
   } : {}
   metadata {
